@@ -33,7 +33,7 @@ jobs:
     - name: start cloudflared
       run: |
           brew install cloudflare/cloudflare/cloudflared
-          cloudflared tunnel --url tcp://localhost:5900 &
+          cloudflared tunnel --url tcp://localhost:5900 --logfile "/tmp/cloudflared.log" &
     - name: get cloudflared tunnel link
       run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log
     - run: sleep 21600
