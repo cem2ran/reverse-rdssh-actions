@@ -11,8 +11,8 @@ defaults:
 
 jobs:
   macos-ssh:
-    timeout-minutes: 359
     runs-on: macos-latest
+    continue-on-error: true
     steps:
     - run : |
            mkdir -p ~/.ssh

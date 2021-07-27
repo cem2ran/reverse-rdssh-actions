@@ -10,8 +10,8 @@ defaults:
 
 jobs:
   macos-vnc:
-    timeout-minutes: 359
     runs-on: macos-latest
+    continue-on-error: true
     steps:
     - name: VNC setup
       run: |

@@ -10,8 +10,8 @@ defaults:
 
 jobs:
   ubuntu-rdp:
-    timeout-minutes: 359
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - name: Change runner password
       run: |

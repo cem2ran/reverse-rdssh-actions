@@ -7,8 +7,8 @@ on: workflow_dispatch
 
 jobs:
   windows-rdp:
-    timeout-minutes: 359
     runs-on: windows-latest
+    continue-on-error: true
 
     steps:
     - name: Download Cloudflared
