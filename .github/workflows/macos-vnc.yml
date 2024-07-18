@@ -30,10 +30,11 @@ jobs:
           echo ${{ secrets.PASSWORD }} | perl -we 'BEGIN { @k = unpack "C*", pack "H*", "1734516E8BA8C5E2FF1C39567390ADCA"}; $_ = <>; chomp; s/^(.{8}).*/$1/; @p = unpack "C*", $_; foreach (@k) { printf "%02X", $_ ^ (shift @p || 0) }; print "\n"' | sudo tee /Library/Preferences/com.apple.VNCSettings.txt
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
-    - name: start cloudflared
+    - name: start ngrok
       run: |
-          brew install cloudflared
-          cloudflared tunnel --url tcp://localhost:5900 --logfile "/tmp/cloudflared.log" &
+          brew install ngrok
+          ngrok authtoken ${{ secrets.NGROK_AUTH }}
+          ngrok tcp 5900 &
     - name: get cloudflared tunnel link
-      run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log
+      run: sleep 5 && curl -s http://localhost:4040/api/tunnels | grep -o '"public_url":"[^"]*' | sed 's/"public_url":"//'
     - run: sleep 21600
