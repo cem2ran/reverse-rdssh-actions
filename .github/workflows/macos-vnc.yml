@@ -10,7 +10,7 @@ defaults:
 
 jobs:
   macos-vnc:
-    runs-on: macos-latest
+    runs-on: macos-12
     continue-on-error: true
     steps:
     - name: VNC setup
