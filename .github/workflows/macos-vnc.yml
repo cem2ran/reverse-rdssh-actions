@@ -32,7 +32,7 @@ jobs:
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
     - name: start cloudflared
       run: |
-          brew install cloudflare/cloudflare/cloudflared
+          brew install cloudflared
           cloudflared tunnel --url tcp://localhost:5900 --logfile "/tmp/cloudflared.log" &
     - name: get cloudflared tunnel link
       run: sleep 10 && grep -m 1 -oE "https://(.+)trycloudflare.com" /tmp/cloudflared.log
